@@ -1,20 +1,20 @@
-// Service Worker for Guberaan Builders Contact Form PWA
+// Service Worker for Guberaan Promotors Site Enquiry Form PWA
 const CACHE_NAME = 'guberaan-form-cache-v1';
-const OFFLINE_URL = 'offline.html';
+const OFFLINE_URL = './offline.html';
 const DB_NAME = 'guberaan-contact-form';
 const STORE_NAME = 'pending-submissions';
 
 // Files to cache for offline use
 const filesToCache = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/app.js',
-  '/manifest.json',
-  '/logo.png',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/offline.html'
+  './',
+  './index.html',
+  './style.css',
+  './app.js',
+  './manifest.json',
+  './logo.png',
+  './icon-192.png',
+  './icon-512.png',
+  './offline.html'
 ];
 
 // Install event - cache all required files

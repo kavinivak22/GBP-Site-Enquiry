@@ -294,16 +294,70 @@ button:active {
 
 /* For smaller screens */
 @media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  
   .container {
-    padding: 30px 20px;
-    margin: 20px auto;
+    padding: 20px 15px;
+    margin: 10px auto;
+    width: 90%;
+    max-width: 90%;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+  
+  h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
   }
   
   .site-option {
     flex: 1 0 100%;
+    padding: 12px 8px;
+  }
+  
+  input, select {
+    padding: 10px 12px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .form-group {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  button {
+    padding: 12px;
+    font-size: 15px;
+    width: 100%;
+  }
+  
+  .logo {
+    max-width: 120px;
   }
   
   .install-prompt {
-    width: 85%;
+    width: 90%;
+    max-width: 300px;
+    padding: 12px 15px;
+    bottom: 10px;
+  }
+  
+  .connection-status {
+    top: 5px;
+    right: 5px;
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+  
+  .pending-notification {
+    top: 5px;
+    font-size: 12px;
+    padding: 5px 10px;
+    width: 90%;
+    max-width: 300px;
   }
 }

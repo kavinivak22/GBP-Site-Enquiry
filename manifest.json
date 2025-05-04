@@ -2,7 +2,7 @@
   "name": "Guberaan Promotors Site Enquiry Form",
   "short_name": "Guberaan Form",
   "description": "Site enquiry form for Guberaan Promotors with offline capability",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f8f9fa",
   "theme_color": "#339933",

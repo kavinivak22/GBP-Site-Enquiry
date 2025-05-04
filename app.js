@@ -200,8 +200,18 @@ function formatPhoneNumber(phone) {
 function createWhatsAppMessage(site, name, phone, product) {
   const mapsLink = mapsLinks[site] || "https://maps.google.com";
   
+  // Site-specific location names
+  const siteNames = {
+    "PKGN": "Guberaan Nagar, Polavakalipalayam",
+    "LVA": "Lake View Avenue, Othakuthirai",
+    "IPBG": "Brindhavan Garden, Sathiyamangalam",
+    "KPBG": "Guberaanin Brindhavan Garden, Kurumandhur"
+  };
+  
+  const siteName = siteNames[site] || "our site";
+  
   const message = `Dear Mr./Ms. ${name}, 👋
-It was a pleasure meeting you at our layout today.
+It was a pleasure meeting you at *${siteName}* today.
 
 🏡 Gated community sites | Ready to Occupy Villas | Rental Properties
 
@@ -210,7 +220,11 @@ It was a pleasure meeting you at our layout today.
 📍 Location: ${mapsLink}
 
 Please feel free to reach out for any further information. We'll be happy to assist you.
-Guberaan Promotors | 9688447799`;
+
+*Guberaan Builders and Promoters*
+At Your Service Since 2005
+
+9688447799`;
 
   return message;
 }
