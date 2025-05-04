@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline - Guberaan Builders</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .container {
+      max-width: 90%;
+      width: 500px;
+      padding: 40px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(to right, #339933, #006600);
+    }
+    
+    .logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+    
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+    
+    p {
+      color: #495057;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+    
+    .button {
+      display: inline-block;
+      padding: 12px 30px;
+      background: linear-gradient(to right, #339933, #006600);
+      color: white;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .button:hover {
+      background: linear-gradient(to right, #006600, #004d00);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(76, 175, 80, 0.15);
+    }
+    
+    .offline-icon {
+      font-size: 70px;
+      color: #e9ecef;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="offline-icon">📶</div>
+    <h1>You're Offline</h1>
+    <p>Sorry, you are currently offline. Please check your internet connection and try again.</p>
+    <p>If you've already submitted forms while offline, they will be automatically sent when you're back online.</p>
+    <a href="/" class="button">Try Again</a>
+  </div>
+</body>
+</html>
