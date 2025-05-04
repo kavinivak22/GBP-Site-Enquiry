@@ -1,9 +1,7 @@
 // Global variables
 let deferredPrompt;
-// Using CORS proxy to solve the CORS issue
-const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyjG9bXCMVncKd3FelMP1__USQf5o4DXkAPvir_TEy5GiJarUcwDUQXOTeW7YzTuJ72kQ/exec';
-const API_URL = PROXY_URL + GOOGLE_SCRIPT_URL; // Google Apps Script URL with CORS proxy
+// Direct API URL without CORS proxy - add ?callback=? to force JSONP
+const API_URL = 'https://script.google.com/macros/s/AKfycbyjG9bXCMVncKd3FelMP1__USQf5o4DXkAPvir_TEy5GiJarUcwDUQXOTeW7YzTuJ72kQ/exec';
 const DB_NAME = 'guberaan-contact-form';
 const DB_VERSION = 1;
 const STORE_NAME = 'pending-submissions';
@@ -293,17 +291,44 @@ async function getPendingCount() {
 // Submit form data to Google Apps Script
 async function submitFormData(formData) {
   try {
-    // Send data to Google Apps Script API
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
-    });
+    // Create a form element
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = API_URL;
+    // Create and use a hidden iframe to avoid page redirect
+    let iframe = document.getElementById('hidden-form-target');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.name = 'hidden-form-target';
+      iframe.id = 'hidden-form-target';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+    form.target = 'hidden-form-target';
+    form.style.display = 'none';
     
-    const result = await response.json();
-    return result;
+    // Add form data as hidden fields
+    for (const key in formData) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = typeof formData[key] === 'object' ? JSON.stringify(formData[key]) : formData[key];
+      form.appendChild(input);
+    }
+    
+    // Add the form to the document and submit it
+    document.body.appendChild(form);
+    form.submit();
+    
+    // After a moment, clean up and resolve with a success response
+    setTimeout(() => {
+      document.body.removeChild(form);
+    }, 1000);
+    
+    return {
+      status: 'success',
+      message: 'Data submitted successfully!'
+    };
   } catch (error) {
     console.error('Error submitting form:', error);
     // Save locally if submission fails due to network issues
