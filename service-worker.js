@@ -117,7 +117,7 @@ async function syncFormData() {
     }
 
     // API URL should match the one in app.js
-    const API_URL = 'https://script.google.com/macros/s/AKfycbyjG9bXCMVncKd3FelMP1__USQf5o4DXkAPvir_TEy5GiJarUcwDUQXOTeW7YzTuJ72kQ/exec';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbx9o3G021Lu5hFOxJaJyO8c1eu9vcx8qLGs7PaA43h73CAff51n8WaYfKVrMDg2UG57yw/exec';
 
     // Process each pending submission
     for (const submission of submissions) {
