@@ -210,7 +210,7 @@ It was a pleasure meeting you at our layout today.
 📍 Location: ${mapsLink}
 
 Please feel free to reach out for any further information. We'll be happy to assist you.
-Guberaan Builders and Promotors | 9688447799`;
+Guberaan Promotors | 9688447799`;
 
   return message;
 }

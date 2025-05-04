@@ -1,7 +1,7 @@
 {
-  "name": "Guberaan Builders Contact Form",
+  "name": "Guberaan Promotors Site Enquiry Form",
   "short_name": "Guberaan Form",
-  "description": "Contact form for Guberaan Builders with offline capability",
+  "description": "Site enquiry form for Guberaan Promotors with offline capability",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#f8f9fa",
