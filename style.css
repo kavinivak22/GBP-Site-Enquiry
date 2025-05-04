@@ -157,6 +157,8 @@ button:active {
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .site-option {
@@ -167,6 +169,7 @@ button:active {
   padding: 15px 10px;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
 .site-option:hover {
@@ -312,9 +315,16 @@ button:active {
     margin-bottom: 20px;
   }
   
+  .site-selector {
+    width: 100%;
+    margin: 0 auto 20px;
+  }
+  
   .site-option {
     flex: 1 0 100%;
     padding: 12px 8px;
+    margin-bottom: 8px;
+    width: 100%;
   }
   
   input, select {
@@ -327,6 +337,7 @@ button:active {
   .form-group {
     width: 100%;
     box-sizing: border-box;
+    margin-bottom: 20px;
   }
   
   button {

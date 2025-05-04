@@ -213,7 +213,7 @@ function createWhatsAppMessage(site, name, phone, product) {
   const message = `Dear Mr./Ms. ${name}, 👋
 It was a pleasure meeting you at *${siteName}* today.
 
-🏡 Gated community sites | Ready to Occupy Villas | Rental Properties
+Approved Plots | Ready to Move In Villas | Rental Properties
 
 📹 Site Videos & Details: https://hovqr.to/8262c683
 
@@ -223,7 +223,6 @@ Please feel free to reach out for any further information. We'll be happy to ass
 
 *Guberaan Builders and Promoters*
 At Your Service Since 2005
-
 9688447799`;
 
   return message;
