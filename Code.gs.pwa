@@ -1,0 +1,160 @@
+const SHEET_ID = "YOUR_SHEET_ID"; // Replace with your actual Google Sheet ID
+
+/**
+ * Serve the web app HTML content
+ * @returns {HtmlOutput} - HTML content to be displayed
+ */
+function doGet() {
+  return HtmlService.createHtmlOutputFromFile('index')
+      .setTitle('Guberaan Builders Contact Form')
+      .addMetaTag('viewport', 'width=device-width, initial-scale=1')
+      .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+/**
+ * Save submitted form data to Google Sheets
+ * @param {string} site - Selected site
+ * @param {string} name - Customer name
+ * @param {string} phone - Phone number
+ * @param {string} product - Interested product
+ * @returns {boolean} - Success status
+ */
+function saveData(site, name, phone, product) {
+  try {
+    // Access the spreadsheet by ID and get the responses sheet
+    const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
+    
+    // Check if "responses" sheet exists, create it if not
+    let sheet = spreadsheet.getSheetByName("responses");
+    if (!sheet) {
+      sheet = spreadsheet.insertSheet("responses");
+      sheet.appendRow(["Timestamp", "Site", "Customer Name", "Phone Number", "Interested Product"]);
+      sheet.getRange(1, 1, 1, 5).setFontWeight("bold").setBackground("#E0E0E0");
+      sheet.setFrozenRows(1);
+    }
+    
+    // Get current date and time
+    const timestamp = new Date();
+    
+    // Append the new row with form data
+    sheet.appendRow([timestamp, site, name, phone, product]);
+    
+    // Log the successful operation
+    Logger.log("Data saved successfully: " + name + ", " + phone);
+    
+    return true;
+  } catch (error) {
+    // Log any errors that occur
+    Logger.log("Error saving data: " + error.toString());
+    return false;
+  }
+}
+
+/**
+ * Process form submission
+ * This function is called from the client-side via google.script.run
+ * @param {Object} formData - Form data object
+ * @returns {Object} - Result object with status and message
+ */
+function processForm(formData) {
+  try {
+    // Save data to spreadsheet
+    const saved = saveData(formData.site, formData.name, formData.phone, formData.product);
+    
+    if (saved) {
+      return {
+        status: 'success',
+        message: 'Data saved successfully!'
+      };
+    } else {
+      return {
+        status: 'error',
+        message: 'Failed to save data. Please try again.'
+      };
+    }
+  } catch (error) {
+    return {
+      status: 'error',
+      message: 'An error occurred: ' + error.toString()
+    };
+  }
+}
+
+/**
+ * Process data submitted via POST request
+ * This function allows the PWA to submit data via fetch API
+ * @param {Object} e - Event object containing POST data
+ * @returns {TextOutput} - JSON response
+ */
+function doPost(e) {
+  try {
+    // Parse the incoming JSON data
+    const formData = JSON.parse(e.postData.contents);
+    
+    // Save the data to the spreadsheet
+    const saved = saveData(formData.site, formData.name, formData.phone, formData.product);
+    
+    // Prepare the response
+    const response = {
+      status: saved ? 'success' : 'error',
+      message: saved ? 'Data saved successfully!' : 'Failed to save data'
+    };
+    
+    // Return the response as JSON
+    return ContentService.createTextOutput(JSON.stringify(response))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    // Handle any errors
+    const errorResponse = {
+      status: 'error',
+      message: 'Error processing request: ' + error.toString()
+    };
+    
+    return ContentService.createTextOutput(JSON.stringify(errorResponse))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+/**
+ * Allow cross-origin requests for the PWA
+ * This special setup is needed for the PWA to work with the Google Apps Script
+ */
+function setupCORS() {
+  const lock = LockService.getScriptLock();
+  lock.tryLock(10000);
+  try {
+    const userProps = PropertiesService.getScriptProperties();
+    
+    // Get current web app URL
+    const webAppUrl = ScriptApp.getService().getUrl();
+    
+    // Get allowable domains from properties
+    let allowedDomains = userProps.getProperty('CORS_ALLOWED_DOMAINS');
+    if (!allowedDomains) {
+      allowedDomains = JSON.stringify([webAppUrl]);
+    } else {
+      // Parse existing domains and add current domain if not present
+      const domains = JSON.parse(allowedDomains);
+      if (!domains.includes(webAppUrl)) {
+        domains.push(webAppUrl);
+        allowedDomains = JSON.stringify(domains);
+      }
+    }
+    
+    // Save allowed domains
+    userProps.setProperty('CORS_ALLOWED_DOMAINS', allowedDomains);
+    
+    return {
+      status: 'success',
+      message: 'CORS setup complete for ' + webAppUrl
+    };
+  } catch (error) {
+    return {
+      status: 'error',
+      message: 'CORS setup failed: ' + error.toString()
+    };
+  } finally {
+    lock.releaseLock();
+  }
+}
