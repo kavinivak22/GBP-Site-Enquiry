@@ -1,7 +1,7 @@
 // Global variables
 let deferredPrompt;
-// Direct API URL without CORS proxy - add ?callback=? to force JSONP
-const API_URL = 'https://script.google.com/macros/s/AKfycbyjG9bXCMVncKd3FelMP1__USQf5o4DXkAPvir_TEy5GiJarUcwDUQXOTeW7YzTuJ72kQ/exec';
+// Google Apps Script web app URL - must be the same in service-worker.js
+const API_URL = 'https://script.google.com/macros/s/AKfycbx3UmH5SrG5fExTWvbiXJgO0ckbSzvVFE4hQpIy00kbA03OOWBCFXa4jlEx5WWMC6M9lQ/exec';
 const DB_NAME = 'guberaan-contact-form';
 const DB_VERSION = 1;
 const STORE_NAME = 'pending-submissions';
@@ -307,14 +307,29 @@ async function submitFormData(formData) {
     form.target = 'hidden-form-target';
     form.style.display = 'none';
     
-    // Add form data as hidden fields
-    for (const key in formData) {
+    // Add form data as hidden fields with explicit field names to match Google Script
+    const formFields = {
+      'site': formData.site || '',
+      'name': formData.name || '',
+      'phone': formData.phone || '',
+      'product': formData.product || ''
+    };
+    
+    // Add each field to the form with proper names
+    for (const key in formFields) {
       const input = document.createElement('input');
       input.type = 'hidden';
       input.name = key;
-      input.value = typeof formData[key] === 'object' ? JSON.stringify(formData[key]) : formData[key];
+      input.value = formFields[key];
       form.appendChild(input);
     }
+    
+    // Add a debug field so we know it's coming from the PWA
+    const debugInput = document.createElement('input');
+    debugInput.type = 'hidden';
+    debugInput.name = 'source';
+    debugInput.value = 'pwa-form';
+    form.appendChild(debugInput);
     
     // Add the form to the document and submit it
     document.body.appendChild(form);

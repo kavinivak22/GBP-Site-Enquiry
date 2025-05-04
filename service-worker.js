@@ -117,25 +117,28 @@ async function syncFormData() {
     }
 
     // API URL should match the one in app.js
-    const API_URL = 'https://script.google.com/macros/s/AKfycbyjG9bXCMVncKd3FelMP1__USQf5o4DXkAPvir_TEy5GiJarUcwDUQXOTeW7YzTuJ72kQ/exec';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbx3UmH5SrG5fExTWvbiXJgO0ckbSzvVFE4hQpIy00kbA03OOWBCFXa4jlEx5WWMC6M9lQ/exec';
 
     // Process each pending submission
     for (const submission of submissions) {
       try {
-        // We'll use a different approach for service worker syncing
-        // Since we can't use DOM methods in the service worker
-        // Let's create a manual form submission
-        const formData = new FormData();
+        // Create a URLSearchParams object for a form-encoded request
+        const params = new URLSearchParams();
         
-        // Add each field to the form data
-        for (const key in submission.data) {
-          formData.append(key, submission.data[key]);
-        }
+        // Add specific fields with the right names
+        params.append('site', submission.data.site || '');
+        params.append('name', submission.data.name || '');
+        params.append('phone', submission.data.phone || '');
+        params.append('product', submission.data.product || '');
+        params.append('source', 'pwa-offline-sync');
         
         // Send as form data instead of JSON to avoid CORS
         const response = await fetch(API_URL, {
           method: 'POST',
-          body: formData
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: params
         });
         
         // Consider it successful if we get any response
