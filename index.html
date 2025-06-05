@@ -1,166 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Guberaan Builders</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #f4f4f4, #e8f5e9);
-      overflow-x: hidden;
-    }
-
-    .background-shapes {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .shape {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(39, 174, 96, 0.15);
-    }
-
-    .shape.one { width: 200px; height: 200px; top: 20px; left: 30px; }
-    .shape.two { width: 150px; height: 150px; bottom: 50px; right: 30px; }
-    .shape.three { width: 100px; height: 100px; top: 200px; right: 20px; background: rgba(22, 160, 133, 0.2); }
-    .shape.four { width: 180px; height: 180px; bottom: 120px; left: 50px; background: rgba(244, 208, 63, 0.2); }
-
-    header {
-      text-align: center;
-      padding: 60px 20px 30px;
-      position: relative;
-      z-index: 1;
-    }
-
-    header h1 {
-      font-size: 32px;
-      font-weight: 700;
-      color: #2c3e50;
-      margin: 0;
-    }
-
-    header p {
-      font-size: 16px;
-      color: #555;
-      margin-top: 10px;
-      font-family: 'Raleway', sans-serif;
-    }
-
-    .section {
-      background: white;
-      margin: 30px auto;
-      max-width: 720px;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      z-index: 1;
-      position: relative;
-    }
-
-    .section h2 {
-      font-size: 20px;
-      margin-bottom: 20px;
-      color: #2c3e50;
-      text-transform: uppercase;
-    }
-
-    .button-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 15px;
-      justify-content: center;
-    }
-
-    .button-grid button {
-      font-family: 'Raleway', sans-serif;
-      padding: 12px;
-      border-radius: 50px;
-      background: linear-gradient(135deg, #27ae60, #219150);
-      color: white;
-      font-weight: bold;
-      font-size: 14px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .button-grid button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-    }
-
-    footer {
-      text-align: center;
-      font-size: 13px;
-      color: #777;
-      padding: 30px 20px 40px;
-    }
-  </style>
-</head>
-<body>
-  <div class="background-shapes">
-    <div class="shape one"></div>
-    <div class="shape two"></div>
-    <div class="shape three"></div>
-    <div class="shape four"></div>
-  </div>
-
-  <header>
-    <h1>Guberaan Builders</h1>
-    <p>Above & Beyond - We Lead.</p>
-  </header>
-
-  <section class="section">
-    <h2>Enquiries</h2>
-    <div class="button-grid">
-      <button onclick="window.location.href='https://script.google.com/macros/s/AKfycbxObuSBQ5sSBTLnhnPnPVJCoyHbvlDd-Zwir9oWUvTuDn8io0mS_YirdEdf2h5TxN8HaA/exec?page=form'">Enquiry Entry</button>
-      <button onclick="window.location.href='https://lookerstudio.google.com/s/lanUc5G9saM'">Site Enquiries</button>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guberaan Promotors site enquiry form - Submit your details and get information about our properties">
+    <meta name="theme-color" content="#339933">
+    <title>Guberaan Promotors Site Enquiry Form</title>
+    
+    <!-- PWA manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- iOS support -->
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#339933">
+    
+    <!-- Styles and fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo-container">
+        <img src="logo.png" alt="Guberaan Promotors Logo" class="logo" style="max-width: 150px;">
+      </div>
+      
+      <h1>Guberaan Promotors Site Enquiry Form</h1>
+      
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="site">Select Site</label>
+          <div class="site-selector">
+            <div class="site-option" data-value="PKGN">
+              <div class="site-option-name">PKGN</div>
+            </div>
+            <div class="site-option" data-value="LVA">
+              <div class="site-option-name">LVA</div>
+            </div>
+            <div class="site-option" data-value="IPBG">
+              <div class="site-option-name">IPBG</div>
+            </div>
+            <div class="site-option" data-value="KPBG">
+              <div class="site-option-name">KPBG</div>
+            </div>
+          </div>
+          <input type="hidden" id="site" name="site" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="name">Name of Customer</label>
+          <input type="text" id="name" name="name" required placeholder="Enter your full name" />
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required placeholder="e.g., 9876543210 or +919876543210" />
+        </div>
+        
+        <div class="form-group">
+          <label for="product">Interested Product</label>
+          <select id="product" name="product" required>
+            <option value="" disabled selected>Select your interest</option>
+            <option value="Site">Site</option>
+            <option value="Building-2BHK">Building - 2BHK</option>
+            <option value="Building-3BHK">Building - 3BHK</option>
+            <option value="Building-4BHK">Building - 4BHK</option>
+          </select>
+        </div>
+        
+        <button type="submit" id="submitBtn">Submit Enquiry</button>
+      </form>
+      
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Processing your request...</p>
+      </div>
+      
+      <div class="status" id="status"></div>
     </div>
-  </section>
-
-  <section class="section">
-    <h2>Entries</h2>
-    <div class="button-grid">
-      <button onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSc0Ho-EUsz4tqYUnGxf23ChLrFPbpfdYh0sStd7LS_b3Vvs3A/viewform?usp=dialog'">Worklog</button>
-      <button onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSdAXtqflsWIw0OMZw_vxDGPsr1IoemiVJMAQaEQVw8zTrJm8Q/viewform?usp=dialog'">Material</button>
-      <button onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSeUk0X13ZYPVUyVaf3rvOOZlsUVtXhY-XkffSQBS_CuPUEYog/viewform?usp=dialog'">Tea</button>
-      <button onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLScXSo6ik8V8uCidht_0H71VX7Lo0GqmaCCMKF8YvzxoUBPrww/viewform?usp=header'">Payment</button>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Reports</h2>
-    <div class="button-grid">
-      <button onclick="window.location.href='https://lookerstudio.google.com/reporting/835b9149-1c6a-4f95-8e34-100393f8af62'">Work Report</button>
-      <button onclick="window.location.href='https://lookerstudio.google.com/reporting/bc6b1334-4875-4f6a-912c-abf65ac672ce'">Tea Report</button>
-      <button onclick="window.location.href='https://lookerstudio.google.com/reporting/93f99dd8-9176-462f-996d-5ea673686113'">Payment Report</button>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Data Logs</h2>
-    <div class="button-grid">
-      <button onclick="window.location.href='https://docs.google.com/spreadsheets/d/1BuhSsxu7pzdh0AJH86kaph52QeomzZHJ7nNkl8d5amU/edit?usp=sharing'">Work Log</button>
-      <button onclick="window.location.href='https://docs.google.com/spreadsheets/d/1hvUycQ6_C7I-i3ND0PqUCCKaDO1UyIFiDrELlpORV_w/edit?usp=sharing'">Material Log</button>
-      <button onclick="window.location.href='https://docs.google.com/spreadsheets/d/1-TdegGDWuTTimPIu4HQFWxVRCWW9sAp4attgL1i969M/edit?usp=sharing'">Tea Log</button>
-      <button onclick="window.location.href='https://docs.google.com/spreadsheets/d/14nsMpnsfGC9KD12wlDUD2YVWYwfjKrSmivEuWhanFYQ/edit?usp=sharing'">Payment Log</button>
-    </div>
-  </section>
-
-  <footer>
-    &copy; 2025 Guberaan Builders. All rights reserved.
-  </footer>
-</body>
+    
+    <!-- App Script -->
+    <script src="app.js"></script>
+  </body>
 </html>
