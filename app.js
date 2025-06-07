@@ -223,7 +223,9 @@ Please feel free to reach out for any further information. We'll be happy to ass
 
 *Guberaan Builders and Promoters*
 At Your Service Since 2005
-9688447799`;
+9688447799
+
+Kindly reply anything to access the links.`;
 
   return message;
 }
